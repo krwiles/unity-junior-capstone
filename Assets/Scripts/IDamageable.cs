@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class IDamageable
+public interface IDamageable
 {
-    
+    public bool TakeDamage(float damage);
 }

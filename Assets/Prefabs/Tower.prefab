@@ -537,6 +537,7 @@ MonoBehaviour:
   _turret: {fileID: 7239108613459503523}
   _enemyLayer: 6
   _turnSpeed: 500
+  _angleTolerance: 5
 --- !u!114 &1446003181730081031
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -552,4 +553,4 @@ MonoBehaviour:
   _projectilePrefab: {fileID: 2556231740264671734, guid: d146b1696d3484348bf11df2fa7b45cc, type: 3}
   _poolContainer: {fileID: 4678901182661940910}
   _bulletOrigin: {fileID: 4695485336743038577}
-  _fireRate: 300
+  _fireRate: 1

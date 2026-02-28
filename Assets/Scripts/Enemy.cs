@@ -1,6 +1,5 @@
 #nullable enable
 using System;
-using Unity.Properties;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour, IPoolable
@@ -9,7 +8,7 @@ public class Enemy : MonoBehaviour, IPoolable
     [SerializeField] private PathNode? _target;
     [SerializeField] private float _speed;
     [SerializeField] private float _reachRadius;
-    [SerializeField] private int _health;
+    [SerializeField] private Health? _health;
 
     [SerializeField]
     private float _distanceToGoal;
@@ -20,6 +19,30 @@ public class Enemy : MonoBehaviour, IPoolable
 
     public event Action<Enemy>? OnDied;
     public event Action<Enemy>? OnCompletedRoute;
+
+    private void Awake()
+    {
+        if (_health == null)
+        {
+            _health = GetComponent<Health>();
+        }
+    }
+
+    private void OnEnable()
+    {
+        if (_health != null)
+        {
+            _health.OnDied += HandleDied;
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (_health != null)
+        {
+            _health.OnDied -= HandleDied;
+        }
+    }
 
     public void Construct(GenericPool<Enemy> pool, PathNode nodeHead)
     {
@@ -32,6 +55,7 @@ public class Enemy : MonoBehaviour, IPoolable
         // check if end of path
         if (_target == null) 
         {
+            OnCompletedRoute?.Invoke(this);
             _enemyPool.Return(this);
         } 
         else
@@ -65,5 +89,11 @@ public class Enemy : MonoBehaviour, IPoolable
         _target = null;
         OnDied = null;
         OnCompletedRoute = null;
+    }
+
+    private void HandleDied(Health _)
+    {
+        OnDied?.Invoke(this);
+        _enemyPool.Return(this);
     }
 }

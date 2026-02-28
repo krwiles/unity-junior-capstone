@@ -4,11 +4,13 @@ using UnityEngine;
 public class Tower : MonoBehaviour
 {
     [SerializeField] private Transform _turret;
-    private HashSet<Enemy> _enemiesInRange = new();
+    private readonly HashSet<Enemy> _enemiesInRange = new();
     [SerializeField] private int _enemyLayer = 6;
     private Enemy _target;
-    [SerializeField] private float _turnSpeed = 500f;
+    [SerializeField] private float _turnSpeed = 700f;
     private Shooter _shooterComponent;
+
+    [SerializeField] private float _angleTolerance = 5f;
 
     
     public void Awake()
@@ -26,33 +28,32 @@ public class Tower : MonoBehaviour
         UpdateTarget();
         if (_target != null)
         {
-            FaceTarget();
-            _shooterComponent.TryFire();
+            bool isFacingTarget = FaceTarget();
+            if (isFacingTarget)
+            {
+                _shooterComponent.TryFire();
+            }
         }
     }
 
     private void UpdateTarget()
     {
-        if (_enemiesInRange.Count == 0)
+        _enemiesInRange.RemoveWhere(enemy => enemy == null || !enemy.gameObject.activeInHierarchy);
+
+        float closestDistanceToGoal = float.MaxValue;
+        _target = null;
+
+        foreach (Enemy enemy in _enemiesInRange)
         {
-            _target = null;
-            return;
-        }
-        else
-        {
-            float closestDistanceToGoal = float.MaxValue;
-            foreach (Enemy enemy in _enemiesInRange)
+            if (enemy.DistanceToGoal < closestDistanceToGoal)
             {
-                if (enemy.DistanceToGoal < closestDistanceToGoal)
-                {
-                    closestDistanceToGoal = enemy.DistanceToGoal;
-                    _target = enemy;
-                }
+                closestDistanceToGoal = enemy.DistanceToGoal;
+                _target = enemy;
             }
         }
     }
 
-    private void FaceTarget()
+    private bool FaceTarget()
     {
         Vector2 dir = _target.transform.position - _turret.position;
 
@@ -61,6 +62,9 @@ public class Tower : MonoBehaviour
         float newZ = Mathf.MoveTowardsAngle(currentZ, targetZ, _turnSpeed * Time.deltaTime);
 
         _turret.rotation = Quaternion.Euler(0f, 0f, newZ);
+
+        bool isFacingTarget = Mathf.Abs(Mathf.DeltaAngle(targetZ, newZ)) < _angleTolerance;
+        return isFacingTarget;
     }
 
 
@@ -85,6 +89,5 @@ public class Tower : MonoBehaviour
             _enemiesInRange.Remove(enemy);
         }
     }
-
 
 }

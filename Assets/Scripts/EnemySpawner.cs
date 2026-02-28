@@ -17,7 +17,7 @@ public class EnemySpawner : MonoBehaviour
 
         _nodeHead.CalculateDistanceToGoal(); // Initialize nodes
         
-        InvokeRepeating(nameof(SpawnEnemy), 1f, 3f);
+        InvokeRepeating(nameof(SpawnEnemy), 1f, 0.5f);
     }
 
     public Enemy SpawnEnemy()
@@ -30,7 +30,6 @@ public class EnemySpawner : MonoBehaviour
         Enemy enemy = _pool.Get();
         enemy.Construct(_pool, _nodeHead);
         enemy.transform.position = spawnLocation;
-        Debug.Log("Enemy Spawned");
         return enemy;
     }
 }

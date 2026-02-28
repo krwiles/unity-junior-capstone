@@ -31,8 +31,7 @@ public class Projectile : MonoBehaviour, IPoolable
     {
         if (other.TryGetComponent<IDamageable>(out var damageable))
         {
-            //damageable.TakeDamage(_damage);
-            Debug.Log("Damageable HIT!");
+            damageable.TakeDamage(_damage);
             _pool.Return(this);
         }
     }

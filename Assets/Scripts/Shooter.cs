@@ -35,7 +35,6 @@ public class Shooter : MonoBehaviour
         projectile.Construct(_pool);
         projectile.transform.position = _bulletOrigin.position;
         projectile.transform.rotation = _bulletOrigin.rotation;
-        Debug.Log("Bullet Spawned");
         return projectile;
     }
 }

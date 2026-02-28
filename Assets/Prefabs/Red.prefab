@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8913383259172814380}
   - component: {fileID: 3399070658131868380}
   - component: {fileID: 5092833903910895188}
+  - component: {fileID: -8917600756445620618}
   m_Layer: 6
   m_Name: Red
   m_TagString: Untagged
@@ -128,5 +129,19 @@ MonoBehaviour:
   _target: {fileID: 0}
   _speed: 2
   _reachRadius: 0.02
-  _health: 1
+  _health: {fileID: 0}
   _distanceToGoal: 0
+--- !u!114 &-8917600756445620618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4561686939649656416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81c2d639008612840a81fc2e69e81da0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Health
+  _maxHealth: 1
+  _resetToMaxOnEnable: 1
