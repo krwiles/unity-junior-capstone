@@ -14,8 +14,10 @@ public class EnemySpawner : MonoBehaviour
     {
         _pool = new GenericPool<Enemy>(_enemyPrefab, _poolContainer.transform);
         _pool.Warm(100);
+
+        _nodeHead.CalculateDistanceToGoal(); // Initialize nodes
         
-        InvokeRepeating(nameof(SpawnEnemy), 1f, 0.2f);
+        InvokeRepeating(nameof(SpawnEnemy), 1f, 3f);
     }
 
     public Enemy SpawnEnemy()

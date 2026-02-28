@@ -1,14 +1,22 @@
 #nullable enable
 using System;
+using Unity.Properties;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour, IPoolable
 {
-    [SerializeField] private GenericPool<Enemy> _enemyPool;
+    [SerializeField] private GenericPool<Enemy>? _enemyPool;
     [SerializeField] private PathNode? _target;
     [SerializeField] private float _speed;
     [SerializeField] private float _reachRadius;
     [SerializeField] private int _health;
+
+    [SerializeField]
+    private float _distanceToGoal;
+    public float DistanceToGoal 
+    { 
+        get { return _distanceToGoal; } 
+    }
 
     public event Action<Enemy>? OnDied;
     public event Action<Enemy>? OnCompletedRoute;
@@ -41,12 +49,15 @@ public class Enemy : MonoBehaviour, IPoolable
         
         Vector3 differenceToTarget = _target.gameObject.transform.position - transform.position;
         transform.Translate(_speed * Time.deltaTime * differenceToTarget.normalized);
-
+        float distanceToTarget = differenceToTarget.magnitude;
+        
         // check if target is reached
-        if (differenceToTarget.sqrMagnitude <= _reachRadius * _reachRadius)
+        if (distanceToTarget <= _reachRadius)
         {
             _target = _target.GetNextNode(); // set next node
         }
+
+        _distanceToGoal = _target.DistanceToGoal + distanceToTarget;
     }
 
     public void ResetState()
