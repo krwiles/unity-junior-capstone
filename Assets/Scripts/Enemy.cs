@@ -68,14 +68,13 @@ public class Enemy : MonoBehaviour, IPoolable<Enemy>
         Vector3 differenceToTarget = _target.gameObject.transform.position - transform.position;
         transform.Translate(_speed * Time.deltaTime * differenceToTarget.normalized);
         float distanceToTarget = differenceToTarget.magnitude;
-        
+        _distanceToGoal = _target.DistanceToGoal + distanceToTarget;
+
         // check if target is reached
         if (distanceToTarget <= _reachRadius)
         {
             _target = _target.NextNode; // set next node
         }
-
-        _distanceToGoal = _target.DistanceToGoal + distanceToTarget;
     }
 
     public void ResetState()
