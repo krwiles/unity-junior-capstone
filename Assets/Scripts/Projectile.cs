@@ -1,11 +1,13 @@
+#nullable enable
+
 using System;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour, IPoolable<Projectile>
 {
-    [SerializeField] private float _speed = 10f;
-    [SerializeField] private float _damage = 1f;
-    [SerializeField] private float _lifetime = 3f;
+    [SerializeField] private float _speed;
+    [SerializeField] private float _damage;
+    [SerializeField] private float _lifetime;
     
     private GenericPool<Projectile>? _pool;
     private float _expire;
@@ -44,5 +46,4 @@ public class Projectile : MonoBehaviour, IPoolable<Projectile>
     {
         // nothing to reset on bullet for now
     }
-
 }

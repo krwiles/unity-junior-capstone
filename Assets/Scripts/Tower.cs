@@ -8,7 +8,7 @@ public class Tower : MonoBehaviour
     [SerializeField] private int _enemyLayer = 6;
     [SerializeField] private float _turnSpeed = 700f;
     [SerializeField] private float _angleTolerance = 5f;
-    
+
     private readonly HashSet<Enemy> _enemiesInRange = new();
     private Shooter _shooter;
     private Enemy _target;
@@ -68,7 +68,6 @@ public class Tower : MonoBehaviour
         return isFacingTarget;
     }
 
-
     public void OnTriggerEnter(Collider other)
     {
         
@@ -90,5 +89,4 @@ public class Tower : MonoBehaviour
             _enemiesInRange.Remove(enemy);
         }
     }
-
 }

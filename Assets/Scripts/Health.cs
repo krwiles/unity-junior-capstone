@@ -9,7 +9,7 @@ public class Health : MonoBehaviour, IDamageable
     
     private bool _isDead;
     
-    public event Action<Health> OnDied;
+    public event Action<Health> OnDied; // communicate to main component
 
 
     private void Awake()
