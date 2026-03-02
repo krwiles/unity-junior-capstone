@@ -2,51 +2,45 @@
 using System;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour, IPoolable
+[RequireComponent(typeof(Health))]
+public class Enemy : MonoBehaviour, IPoolable<Enemy>
 {
-    [SerializeField] private GenericPool<Enemy>? _enemyPool;
     [SerializeField] private PathNode? _target;
     [SerializeField] private float _speed;
     [SerializeField] private float _reachRadius;
-    [SerializeField] private Health? _health;
 
-    [SerializeField]
-    private float _distanceToGoal;
-    public float DistanceToGoal 
-    { 
-        get { return _distanceToGoal; } 
-    }
+    [SerializeField] private float _distanceToGoal;
+    public float DistanceToGoal => _distanceToGoal;
+
+    private Health _health = null!;
+    private GenericPool<Enemy>? _pool;
 
     public event Action<Enemy>? OnDied;
     public event Action<Enemy>? OnCompletedRoute;
 
+
     private void Awake()
     {
-        if (_health == null)
-        {
-            _health = GetComponent<Health>();
-        }
+        _health = GetComponent<Health>();
     }
 
     private void OnEnable()
     {
-        if (_health != null)
-        {
-            _health.OnDied += HandleDied;
-        }
+        _health.OnDied += HandleDied; 
     }
 
     private void OnDisable()
     {
-        if (_health != null)
-        {
-            _health.OnDied -= HandleDied;
-        }
+        _health.OnDied -= HandleDied; // lifecycle management
     }
 
-    public void Construct(GenericPool<Enemy> pool, PathNode nodeHead)
+    public void SetPool(GenericPool<Enemy> pool)
     {
-        _enemyPool = pool;
+        _pool = pool;
+    }
+
+    public void InitializeRoute(PathNode nodeHead)
+    {
         _target = nodeHead;
     }
 
@@ -56,7 +50,7 @@ public class Enemy : MonoBehaviour, IPoolable
         if (_target == null) 
         {
             OnCompletedRoute?.Invoke(this);
-            _enemyPool.Return(this);
+            _pool?.Return(this);
         } 
         else
         {
@@ -78,7 +72,7 @@ public class Enemy : MonoBehaviour, IPoolable
         // check if target is reached
         if (distanceToTarget <= _reachRadius)
         {
-            _target = _target.GetNextNode(); // set next node
+            _target = _target.NextNode; // set next node
         }
 
         _distanceToGoal = _target.DistanceToGoal + distanceToTarget;
@@ -94,6 +88,6 @@ public class Enemy : MonoBehaviour, IPoolable
     private void HandleDied(Health _)
     {
         OnDied?.Invoke(this);
-        _enemyPool.Return(this);
+        _pool?.Return(this);
     }
 }

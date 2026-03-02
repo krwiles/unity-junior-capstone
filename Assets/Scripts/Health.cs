@@ -5,15 +5,12 @@ public class Health : MonoBehaviour, IDamageable
 {
     [SerializeField] private float _maxHealth = 1f;
     [SerializeField] private bool _resetToMaxOnEnable = true;
-
-    private float _currentHealth;
+    [SerializeField] private float _currentHealth;
+    
     private bool _isDead;
-
-    public float CurrentHealth => _currentHealth;
-    public float MaxHealth => _maxHealth;
-    public bool IsDead => _isDead;
-
+    
     public event Action<Health> OnDied;
+
 
     private void Awake()
     {

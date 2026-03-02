@@ -2,14 +2,15 @@ using UnityEngine;
 
 public class Shooter : MonoBehaviour
 {
-    [SerializeField] private GenericPool<Projectile> _pool;
+
     [SerializeField] private Projectile _projectilePrefab;
     [SerializeField] private GameObject _poolContainer;
-
     [SerializeField] private Transform _bulletOrigin;
     [SerializeField] private float _fireRate = 1f;
-
+    
+    private GenericPool<Projectile> _pool;
     private float _nextFireTime;
+
 
     void Awake()
     {
@@ -32,7 +33,6 @@ public class Shooter : MonoBehaviour
     private Projectile SpawnProjectile()
     {
         Projectile projectile = _pool.Get();
-        projectile.Construct(_pool);
         projectile.transform.position = _bulletOrigin.position;
         projectile.transform.rotation = _bulletOrigin.rotation;
         return projectile;

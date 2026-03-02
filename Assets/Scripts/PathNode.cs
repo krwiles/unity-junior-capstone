@@ -5,13 +5,11 @@ public class PathNode : MonoBehaviour
 {
     [SerializeField, Tooltip("Leave empty for the final node in the path.")]
     private PathNode? _nextNode;
-
-    [SerializeField]
+    public PathNode? NextNode => _nextNode;
+  
     private float _distanceToGoal = 0f;
-    public float DistanceToGoal
-    {
-        get { return _distanceToGoal; }
-    }
+    public float DistanceToGoal => _distanceToGoal;
+
 
     public float CalculateDistanceToGoal()
     {
@@ -27,10 +25,5 @@ public class PathNode : MonoBehaviour
             _distanceToGoal = nextDistance + distanceToNext;
             return _distanceToGoal;
         }
-    }
-
-    public PathNode? GetNextNode()
-    {
-        return _nextNode;
     }
 }

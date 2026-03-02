@@ -28,7 +28,7 @@ public class EnemySpawner : MonoBehaviour
     public Enemy SpawnEnemy(Vector3 spawnLocation)
     {
         Enemy enemy = _pool.Get();
-        enemy.Construct(_pool, _nodeHead);
+        enemy.InitializeRoute(_nodeHead);
         enemy.transform.position = spawnLocation;
         return enemy;
     }

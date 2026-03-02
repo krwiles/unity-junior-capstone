@@ -6,7 +6,7 @@ using System.Collections.Generic;
 /// Uses a queue for fast reuse and a set to guard against duplicate returns.
 /// </summary>
 /// <typeparam name="T">Pooled component type.</typeparam>
-public class GenericPool<T> where T : MonoBehaviour, IPoolable
+public class GenericPool<T> where T : MonoBehaviour, IPoolable<T>
 {
     private readonly T _prefab;
     private readonly Transform _poolParent;
@@ -52,6 +52,7 @@ public class GenericPool<T> where T : MonoBehaviour, IPoolable
     private T CreateNew()
     {
         var obj = Object.Instantiate(_prefab, _poolParent);
+        obj.SetPool(this);
         obj.gameObject.SetActive(false);
         _pool.Enqueue(obj);
         _inPool.Add(obj);

@@ -1,18 +1,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Shooter))]
 public class Tower : MonoBehaviour
 {
     [SerializeField] private Transform _turret;
-    private readonly HashSet<Enemy> _enemiesInRange = new();
     [SerializeField] private int _enemyLayer = 6;
-    private Enemy _target;
     [SerializeField] private float _turnSpeed = 700f;
-    private Shooter _shooterComponent;
-
     [SerializeField] private float _angleTolerance = 5f;
-
     
+    private readonly HashSet<Enemy> _enemiesInRange = new();
+    private Shooter _shooter;
+    private Enemy _target;
+
+
     public void Awake()
     {
         if (_turret == null)
@@ -20,7 +21,7 @@ public class Tower : MonoBehaviour
             Debug.LogWarning("Turret child not found.");
         }
         
-        _shooterComponent = GetComponent<Shooter>();
+        _shooter = GetComponent<Shooter>();
     }
 
     public void Update()
@@ -31,7 +32,7 @@ public class Tower : MonoBehaviour
             bool isFacingTarget = FaceTarget();
             if (isFacingTarget)
             {
-                _shooterComponent.TryFire();
+                _shooter.TryFire();
             }
         }
     }
