@@ -14,7 +14,7 @@ public class EnemySpawner : MonoBehaviour, IEnemySpawnSource
     public event Action<Enemy>? OnEnemySpawned;
 
 
-    private void Start()
+    private void Awake()
     {
         _pool = new GenericPool<Enemy>(_enemyPrefab, gameObject.transform);
         _pool.Warm(100);
