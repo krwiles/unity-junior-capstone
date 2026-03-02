@@ -1,18 +1,22 @@
+#nullable enable
+
 using System;
 using System.Collections;
 using UnityEngine;
 
-public class EnemySpawner : MonoBehaviour
+public class EnemySpawner : MonoBehaviour, IEnemySpawnSource
 {
-    [SerializeField] private GenericPool<Enemy> _pool;
     [SerializeField] private Enemy _enemyPrefab;
-    [SerializeField] private GameObject _poolContainer;
     [SerializeField] private PathNode _nodeHead;
+    
+    private GenericPool<Enemy> _pool;
+
+    public event Action<Enemy>? OnEnemySpawned;
 
 
     private void Start()
     {
-        _pool = new GenericPool<Enemy>(_enemyPrefab, _poolContainer.transform);
+        _pool = new GenericPool<Enemy>(_enemyPrefab, gameObject.transform);
         _pool.Warm(100);
 
         _nodeHead.CalculateDistanceToGoal(); // Initialize nodes
@@ -30,6 +34,8 @@ public class EnemySpawner : MonoBehaviour
         Enemy enemy = _pool.Get();
         enemy.InitializeRoute(_nodeHead);
         enemy.transform.position = spawnLocation;
+        
+        OnEnemySpawned?.Invoke(enemy);
         return enemy;
     }
 }
