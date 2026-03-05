@@ -129,8 +129,10 @@ MonoBehaviour:
   _target: {fileID: 0}
   _speed: 2
   _reachRadius: 0.02
-  _health: {fileID: 0}
   _distanceToGoal: 0
+  _damage: 1
+  _score: 1
+  _value: 10
 --- !u!114 &-8917600756445620618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,3 +147,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Health
   _maxHealth: 1
   _resetToMaxOnEnable: 1
+  _currentHealth: 1

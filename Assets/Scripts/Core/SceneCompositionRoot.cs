@@ -8,20 +8,37 @@ using UnityEngine;
 public class SceneCompositionRoot : MonoBehaviour
 {
     [SerializeField] private MonoBehaviour[] _spawnSourceBehaviours = Array.Empty<MonoBehaviour>();
+    [SerializeField] private GameHudPresenter _gameHudPresenter;
 
     private EnemyEventBridge? _enemyEventBridge;
+
+    private IGameStateService? _gameStateService;
+    private ICurrencyService? _currencyService;
 
 
     private void Awake()
     {
         var spawnSources = ValidateAndCastSpawners();
         _enemyEventBridge = new EnemyEventBridge(spawnSources);
-        _enemyEventBridge.OnEnemyDied += EnemyDied; // Testing
+
+        _gameStateService = new GameStateService();
+        _currencyService = new CurrencyService();
+
+        // Subscribe services to enemy events
+        _enemyEventBridge.OnEnemyCompletedRoute += EnemyCompletedRoute;
+        _enemyEventBridge.OnEnemyDied += EnemyDied;
+
+        _gameHudPresenter.Initialize(_gameStateService, _currencyService);
     }
 
     private void OnDestroy()
     {
-        _enemyEventBridge?.Dispose(); // make sure references are cleaned up
+        if (_enemyEventBridge != null)
+        {
+            _enemyEventBridge.OnEnemyCompletedRoute -= EnemyCompletedRoute;
+            _enemyEventBridge.OnEnemyDied -= EnemyDied;
+            _enemyEventBridge.Dispose(); // make sure references are cleaned up
+        }
         _enemyEventBridge = null;
     }
 
@@ -46,11 +63,14 @@ public class SceneCompositionRoot : MonoBehaviour
         return spawnSources;
     }
 
-    // Testing functionality
-    private int enemiesDead = 0;
+    private void EnemyCompletedRoute(Enemy enemy)
+    {
+        _gameStateService?.DamageBase(enemy.Damage);
+    }
+
     private void EnemyDied(Enemy enemy) 
     {
-        enemiesDead += 1;
-        Debug.Log("Enemies dead: " + enemiesDead);
+        _currencyService?.Add(enemy.Value);
+        _gameStateService?.AddScore(enemy.Score);
     }
 }

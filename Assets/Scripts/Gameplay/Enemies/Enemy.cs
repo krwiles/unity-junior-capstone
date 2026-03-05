@@ -8,9 +8,15 @@ public class Enemy : MonoBehaviour, IPoolable<Enemy>
     [SerializeField] private PathNode? _target;
     [SerializeField] private float _speed;
     [SerializeField] private float _reachRadius;
-
     [SerializeField] private float _distanceToGoal;
+    [SerializeField] private int _damage;
+    [SerializeField] private int _score;
+    [SerializeField] private int _value;
+
     public float DistanceToGoal => _distanceToGoal;
+    public int Damage => _damage;
+    public int Score => _score;
+    public int Value => _value;
 
     private Health _health = null!;
     private GenericPool<Enemy>? _pool;
