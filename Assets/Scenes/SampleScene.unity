@@ -1254,7 +1254,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 880564032}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Pathway
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1571,7 +1571,7 @@ GameObject:
   - component: {fileID: 1026651510}
   - component: {fileID: 1026651509}
   - component: {fileID: 1026651508}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Pathway (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1683,7 +1683,7 @@ GameObject:
   - component: {fileID: 1095297571}
   - component: {fileID: 1095297570}
   - component: {fileID: 1095297569}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Pathway (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1795,7 +1795,7 @@ GameObject:
   - component: {fileID: 1116287346}
   - component: {fileID: 1116287345}
   - component: {fileID: 1116287344}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Pathway (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1895,6 +1895,56 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1116287342}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1131648017
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1131648019}
+  - component: {fileID: 1131648018}
+  m_Layer: 0
+  m_Name: TowerPreview
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1131648018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1131648017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5731eaaae934a347ae9ce33be08851f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Preview.TowerPreview
+  _camera: {fileID: 330585545}
+  _previewPrefab: {fileID: -2737028074832917263, guid: daa1d321ffc97b749b2e1b57a5c10049, type: 3}
+  _targetZ: 0
+  _instantiateOnAwake: 1
+  _validMaterial: {fileID: 2100000, guid: 35b84aed67cda3a49a07c2e3d9b85ee4, type: 2}
+  _invalidMaterial: {fileID: 2100000, guid: 8aeb9743556e9354ba82daeda65551ff, type: 2}
+--- !u!4 &1131648019
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1131648017}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.15966, y: -0.07486, z: 0.39}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1164743683
 GameObject:
   m_ObjectHideFlags: 0
@@ -1907,7 +1957,7 @@ GameObject:
   - component: {fileID: 1164743687}
   - component: {fileID: 1164743686}
   - component: {fileID: 1164743685}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Pathway (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2019,7 +2069,7 @@ GameObject:
   - component: {fileID: 1259420165}
   - component: {fileID: 1259420164}
   - component: {fileID: 1259420163}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Pathway (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2131,7 +2181,7 @@ GameObject:
   - component: {fileID: 1292843441}
   - component: {fileID: 1292843440}
   - component: {fileID: 1292843439}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Pathway (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2470,7 +2520,7 @@ GameObject:
   - component: {fileID: 1645385861}
   - component: {fileID: 1645385860}
   - component: {fileID: 1645385859}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Pathway (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2657,7 +2707,7 @@ GameObject:
   - component: {fileID: 1818387634}
   - component: {fileID: 1818387633}
   - component: {fileID: 1818387632}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Pathway (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2861,7 +2911,7 @@ GameObject:
   - component: {fileID: 1988078279}
   - component: {fileID: 1988078278}
   - component: {fileID: 1988078277}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Pathway
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3031,3 +3081,4 @@ SceneRoots:
   - {fileID: 1375240189798093319}
   - {fileID: 706170791}
   - {fileID: 520047099}
+  - {fileID: 1131648019}
