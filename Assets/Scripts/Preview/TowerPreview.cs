@@ -58,14 +58,6 @@ namespace Preview
             Vector3 pointer = GetPointerWorldPosition();
             Vector3 snapped = GetSnappedWorldPosition(pointer);
             _instance.transform.position = snapped;
-            if (_placementProbe.IsValid) 
-            {
-                OverrideAllMaterials(_instance, _validMaterial);
-            }
-            else 
-            {
-                OverrideAllMaterials(_instance, _invalidMaterial);
-            }
         }
 
         // Public helper: get the world position under the pointer on the configured Z plane

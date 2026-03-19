@@ -536,3 +536,5 @@ MonoBehaviour:
   blockingLayers:
     serializedVersion: 2
     m_Bits: 768
+  _validMaterial: {fileID: 2100000, guid: 35b84aed67cda3a49a07c2e3d9b85ee4, type: 2}
+  _invalidMaterial: {fileID: 2100000, guid: 8aeb9743556e9354ba82daeda65551ff, type: 2}
