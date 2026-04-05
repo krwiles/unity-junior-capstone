@@ -13,8 +13,6 @@ namespace Preview
         [SerializeField] private PlacementProbe _previewPrefab;
         [SerializeField] private float _targetZ = 0f;
         [SerializeField] private bool _instantiateOnAwake = true;
-        [SerializeField] private Material _validMaterial;
-        [SerializeField] private Material _invalidMaterial;
 
         private GameObject? _instance;
         private PlacementProbe? _placementProbe;
@@ -78,22 +76,6 @@ namespace Preview
             }
 
             return Vector3.zero;
-        }
-
-        public static void OverrideAllMaterials(GameObject root, Material replacement, bool includeInactive = true)
-        {
-            if (root == null || replacement == null) return;
-
-            var renderers = root.GetComponentsInChildren<Renderer>(includeInactive);
-            foreach (var r in renderers)
-            {
-                var mats = r.materials; // instance materials (safe for runtime override)
-                for (int i = 0; i < mats.Length; i++)
-                {
-                    mats[i] = replacement;
-                }
-                r.materials = mats;
-            }
         }
 
         public Vector3 GetSnappedWorldPosition(Vector3 worldPosition)
