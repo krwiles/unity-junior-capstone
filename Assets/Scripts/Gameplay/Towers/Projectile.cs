@@ -31,6 +31,8 @@ public class Projectile : MonoBehaviour, IPoolable<Projectile>
         }
         
         transform.Translate(_speed * Time.deltaTime * Vector3.up);
+
+        //TODO: address the potential issue of translating through an enemy
     }
 
     public void OnTriggerEnter(Collider other)
